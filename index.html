@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório de Perdas e Ganhos - Decisão Impactante</title>
+    <style>
+        /* Estilo contemporâneo: Gradientes suaves, sombras sutis, tipografia moderna, layout responsivo */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.1em;
+            color: #7f8c8d;
+            margin-bottom: 40px;
+        }
+
+        .matrix {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 20px;
+        }
+
+        .quadrant {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .quadrant:hover {
+            transform: translateY(-5px);
+        }
+
+        .quadrant h2 {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .ganhos-com { background: linear-gradient(45deg, #27ae60, #2ecc71); }
+        .perdas-com { background: linear-gradient(45deg, #e74c3c, #c0392b); }
+        .ganhos-sem { background: linear-gradient(45deg, #3498db, #2980b9); }
+        .perdas-sem { background: linear-gradient(45deg, #f39c12, #e67e22); }
+
+        .item-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .item input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .item input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .add-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .add-btn:hover {
+            background: #2980b9;
+        }
+
+        .total {
+            font-weight: bold;
+            margin-top: 15px;
+            text-align: right;
+            font-size: 1.2em;
+        }
+
+        .decision-score {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background: #ecf0f1;
+            border-radius: 10px;
+        }
+
+        .decision-score h3 {
+            color: #2c3e50;
+        }
+
+        .score-value {
+            font-size: 2em;
+            color: #27ae60;
+        }
+
+        /* Efeito impactante: Partículas de fundo sutis */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(0); opacity: 0.5; }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .matrix {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="particles">
+            <div class="particle" style="width: 10px; height: 10px; top: 10%; left: 20%; animation-delay: 0s;"></div>
+            <div class="particle" style="width: 15px; height: 15px; top: 30%; left: 50%; animation-delay: 2s;"></div>
+            <div class="particle" style="width: 8px; height: 8px; top: 50%; left: 80%; animation-delay: 4s;"></div>
+            <div class="particle" style="width: 12px; height: 12px; top: 70%; left: 30%; animation-delay: 6s;"></div>
+        </div>
+
+        <h1>Relatório de Perdas e Ganhos</h1>
+        <p class="description">Uma ferramenta interativa para analisar decisões de forma equilibrada. Preencha os quadrantes, atribua pontuações e veja o saldo final para uma escolha impactante!</p>
+
+        <div class="matrix">
+            <div class="quadrant">
+                <h2 class="ganhos-com">Ganhos com a Decisão</h2>
+                <ul class="item-list" id="ganhos-com-list"></ul>
+                <div class="item">
+                    <input type="text" placeholder="Descreva o ganho...">
+                    <input type="number" placeholder="Pontos" min="0" max="10">
+                    <button class="add-btn" onclick="addItem('ganhos-com-list')">Adicionar</button>
+                </div>
+                <p class="total" id="ganhos-com-total">Total: 0</p>
+            </div>
+
+            <div class="quadrant">
+                <h2 class="perdas-com">Perdas com a Decisão</h2>
+                <ul class="item-list" id="perdas-com-list"></ul>
+                <div class="item">
+                    <input type="text" placeholder="Descreva a perda...">
+                    <input type="number" placeholder="Pontos" min="0" max="10">
+                    <button class="add-btn" onclick="addItem('perdas-com-list')">Adicionar</button>
+                </div>
+                <p class="total" id="perdas-com-total">Total: 0</p>
+            </div>
+
+            <div class="quadrant">
+                <h2 class="ganhos-sem">Ganhos sem a Decisão</h2>
+                <ul class="item-list" id="ganhos-sem-list"></ul>
+                <div class="item">
+                    <input type="text" placeholder="Descreva o ganho...">
+                    <input type="number" placeholder="Pontos" min="0" max="10">
+                    <button class="add-btn" onclick="addItem('ganhos-sem-list')">Adicionar</button>
+                </div>
+                <p class="total" id="ganhos-sem-total">Total: 0</p>
+            </div>
+
+            <div class="quadrant">
+                <h2 class="perdas-sem">Perdas sem a Decisão</h2>
+                <ul class="item-list" id="perdas-sem-list"></ul>
+                <div class="item">
+                    <input type="text" placeholder="Descreva a perda...">
+                    <input type="number" placeholder="Pontos" min="0" max="10">
+                    <button class="add-btn" onclick="addItem('perdas-sem-list')">Adicionar</button>
+                </div>
+                <p class="total" id="perdas-sem-total">Total: 0</p>
+            </div>
+        </div>
+
+        <div class="decision-score">
+            <h3>Saldo da Decisão</h3>
+            <p class="score-value" id="score-value">0</p>
+            <p id="recommendation">Preencha os quadrantes para calcular!</p>
+            <button class="add-btn" style="margin: 0 auto; display: block;" onclick="calculateScore()">Calcular Saldo</button>
+        </div>
+    </div>
+
+    <script>
+        function addItem(listId) {
+            const list = document.getElementById(listId);
+            const inputs = list.parentElement.querySelectorAll('input');
+            const desc = inputs[0].value.trim();
+            const points = parseInt(inputs[1].value) || 0;
+
+            if (desc) {
+                const li = document.createElement('li');
+                li.className = 'item';
+                li.innerHTML = `${desc} <span style="margin-left: auto;">(${points} pts)</span>`;
+                list.appendChild(li);
+
+                inputs[0].value = '';
+                inputs[1].value = '';
+                updateTotal(listId);
+            }
+        }
+
+        function updateTotal(listId) {
+            const list = document.getElementById(listId);
+            const items = list.querySelectorAll('li');
+            let total = 0;
+            items.forEach(item => {
+                const points = parseInt(item.querySelector('span').textContent.match(/\d+/)[0]);
+                total += points;
+            });
+            document.getElementById(`${listId}-total`).textContent = `Total: ${total}`;
+        }
+
+        function calculateScore() {
+            const ganhosCom = parseInt(document.getElementById('ganhos-com-total').textContent.match(/\d+/)[0]);
+            const perdasCom = parseInt(document.getElementById('perdas-com-total').textContent.match(/\d+/)[0]);
+            const ganhosSem = parseInt(document.getElementById('ganhos-sem-total').textContent.match(/\d+/)[0]);
+            const perdasSem = parseInt(document.getElementById('perdas-sem-total').textContent.match(/\d+/)[0]);
+
+            const favor = ganhosCom + perdasSem;
+            const contra = perdasCom + ganhosSem;
+            const score = favor - contra;
+
+            document.getElementById('score-value').textContent = score;
+            document.getElementById('score-value').style.color = score > 0 ? '#27ae60' : (score < 0 ? '#e74c3c' : '#f39c12');
+
+            let rec = 'Equilíbrio neutro. Reflita mais!';
+            if (score > 0) rec = 'Favorece a decisão! Vá em frente com confiança.';
+            if (score < 0) rec = 'Não favorece a decisão. Considere alternativas.';
+            document.getElementById('recommendation').textContent = rec;
+        }
+    </script>
+</body>
+</html>
