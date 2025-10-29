@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relatório de Perdas e Ganhos - Decisão Impactante</title>
+    <title>Ferramenta Perdas e Ganhos Impulso Coaching - Relatório de Decisão</title>
     <style>
         /* Estilo contemporâneo: Gradientes suaves, sombras sutis, tipografia moderna, layout responsivo */
         body {
@@ -32,16 +32,44 @@
             text-align: center;
             color: #2c3e50;
             font-size: 2.5em;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
+        }
+
+        .slogan {
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-style: italic;
         }
 
         .description {
             text-align: center;
             font-size: 1.1em;
             color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .personal-data {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-bottom: 40px;
+            gap: 10px;
+        }
+
+        .personal-data input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 200px;
+            max-width: 100%;
+        }
+
+        .personal-data input[required] {
+            border-color: #3498db;
         }
 
         .matrix {
@@ -51,7 +79,6 @@
         }
 
         .quadrant {
-            background: #fff;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -61,6 +88,11 @@
         .quadrant:hover {
             transform: translateY(-5px);
         }
+
+        .ganhos-com-quad { background: #e8f5e9; } /* Verde claro */
+        .perdas-com-quad { background: #ffebee; } /* Vermelho claro */
+        .ganhos-sem-quad { background: #e3f2fd; } /* Azul claro */
+        .perdas-sem-quad { background: #fff3e0; } /* Laranja claro */
 
         .quadrant h2 {
             font-size: 1.4em;
@@ -145,6 +177,32 @@
             color: #27ae60;
         }
 
+        #scoreChart {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #34495e;
+        }
+
         /* Efeito impactante: Partículas de fundo sutis */
         .particles {
             position: absolute;
@@ -174,6 +232,9 @@
             .matrix {
                 grid-template-columns: 1fr;
             }
+            .personal-data {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -186,11 +247,19 @@
             <div class="particle" style="width: 12px; height: 12px; top: 70%; left: 30%; animation-delay: 6s;"></div>
         </div>
 
-        <h1>Relatório de Perdas e Ganhos</h1>
+        <h1>Ferramenta Perdas e Ganhos Impulso Coaching</h1>
+        <p class="slogan">A mudança pode acontecer em um instante.</p>
         <p class="description">Uma ferramenta interativa para analisar decisões de forma equilibrada. Preencha os quadrantes, atribua pontuações e veja o saldo final para uma escolha impactante!</p>
 
+        <div class="personal-data">
+            <input type="text" placeholder="Nome Completo" required>
+            <input type="number" placeholder="Idade" min="0" required>
+            <input type="text" placeholder="Profissão" required>
+            <input type="email" placeholder="Email" required>
+        </div>
+
         <div class="matrix">
-            <div class="quadrant">
+            <div class="quadrant ganhos-com-quad">
                 <h2 class="ganhos-com">Ganhos com a Decisão</h2>
                 <ul class="item-list" id="ganhos-com-list"></ul>
                 <div class="item">
@@ -201,7 +270,7 @@
                 <p class="total" id="ganhos-com-total">Total: 0</p>
             </div>
 
-            <div class="quadrant">
+            <div class="quadrant perdas-com-quad">
                 <h2 class="perdas-com">Perdas com a Decisão</h2>
                 <ul class="item-list" id="perdas-com-list"></ul>
                 <div class="item">
@@ -212,7 +281,7 @@
                 <p class="total" id="perdas-com-total">Total: 0</p>
             </div>
 
-            <div class="quadrant">
+            <div class="quadrant ganhos-sem-quad">
                 <h2 class="ganhos-sem">Ganhos sem a Decisão</h2>
                 <ul class="item-list" id="ganhos-sem-list"></ul>
                 <div class="item">
@@ -223,7 +292,7 @@
                 <p class="total" id="ganhos-sem-total">Total: 0</p>
             </div>
 
-            <div class="quadrant">
+            <div class="quadrant perdas-sem-quad">
                 <h2 class="perdas-sem">Perdas sem a Decisão</h2>
                 <ul class="item-list" id="perdas-sem-list"></ul>
                 <div class="item">
@@ -239,11 +308,20 @@
             <h3>Saldo da Decisão</h3>
             <p class="score-value" id="score-value">0</p>
             <p id="recommendation">Preencha os quadrantes para calcular!</p>
+            <canvas id="scoreChart"></canvas>
             <button class="add-btn" style="margin: 0 auto; display: block;" onclick="calculateScore()">Calcular Saldo</button>
+            <div class="actions">
+                <button class="action-btn" onclick="downloadHTML()">Baixar HTML</button>
+                <button class="action-btn" onclick="printToPDF()">Imprimir para PDF</button>
+                <button class="action-btn" onclick="sendEmail()">Enviar por Email</button>
+            </div>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        let chart = null;
+
         function addItem(listId) {
             const list = document.getElementById(listId);
             const inputs = list.parentElement.querySelectorAll('input');
@@ -290,6 +368,47 @@
             if (score > 0) rec = 'Favorece a decisão! Vá em frente com confiança.';
             if (score < 0) rec = 'Não favorece a decisão. Considere alternativas.';
             document.getElementById('recommendation').textContent = rec;
+
+            // Atualizar gráfico
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Ganhos Com', 'Perdas Com', 'Ganhos Sem', 'Perdas Sem'],
+                    datasets: [{
+                        label: 'Pontuação por Tema',
+                        data: [ganhosCom, perdasCom, ganhosSem, perdasSem],
+                        backgroundColor: ['#2ecc71', '#e74c3c', '#3498db', '#f39c12']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            });
+        }
+
+        function downloadHTML() {
+            const content = document.documentElement.outerHTML;
+            const blob = new Blob([content], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'relatorio_perdas_ganhos.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function printToPDF() {
+            window.print(); // Usa a função de impressão do navegador para salvar como PDF
+        }
+
+        function sendEmail() {
+            const subject = 'Relatório Perdas e Ganhos Impulso Coaching';
+            const body = encodeURIComponent(document.documentElement.outerHTML);
+            window.location.href = `mailto:impulsoflow@gmail.com?subject=${subject}&body=${body}`;
         }
     </script>
 </body>
